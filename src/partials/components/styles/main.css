@@ -1,0 +1,56 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat";
+  color: white;
+}
+
+body {
+  background-color: #282A36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app {
+  background-color: #44475A;
+  width: 700px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-left: 50px;
+  border-radius: 10px;
+  border: #272729 2px solid;
+  justify-content: space-around;
+}
+
+h1 {
+  font-family: "Montserrat";
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+h2.mostrapergunta {
+  font-weight: 400;
+}
+
+#submit-button {
+  background-color: #a466fc;
+  border: none;
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+#submit-button:hover {
+  background-color: aliceblue;
+  color: #a466fc;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+#button-holder {
+  margin-left: 50px;
+}/*# sourceMappingURL=main.css.map */

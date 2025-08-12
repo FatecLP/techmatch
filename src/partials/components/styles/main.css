@@ -5,17 +5,18 @@
   color: white;
 }
 
-body {
+main {
   background-color: #282A36;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
 }
 
 .app {
   background-color: #44475A;
-  width: 700px;
+  width: 600px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -53,4 +54,53 @@ h2.mostrapergunta {
 
 #button-holder {
   margin-left: 50px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.home {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 720px;
+  background-color: #a466fc;
+  position: relative;
+  padding: 10px;
+  justify-content: start;
+  background: url(https://img.freepik.com/vetores-gratis/fundo-de-luzes-bokeh-abstratas_1409-1235.jpg?semt=ais_hybrid&w=740&q=80) no-repeat top center/cover;
+}
+.home .mod {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #8A449C;
+  opacity: 62%;
+  display: flex;
+}
+.home .titulo {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: center;
+  gap: 100px;
+  align-items: left;
+  width: 30%;
+  margin-left: 50px;
+}
+.home .titulo h2 {
+  font-family: "Inter", sans-serif;
+  font-size: 62px;
+}
+.home .titulo a {
+  text-decoration: none;
+  background-color: #8A449C;
+  padding: 15px 35px;
+  border-radius: 10px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
 }/*# sourceMappingURL=main.css.map */

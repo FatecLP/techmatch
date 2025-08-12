@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qual profissional de TI você seria ?</title>
+    <link rel="stylesheet" href="../diagnostico/src/partials/components/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="home">
+        <div class="mod"></div>
+        <div class="titulo">
+            <h2>Quizz: Você é que tipo de Developer?</h2>
+
+            <a href="#heading">Começar</a>
+        </div>
+    </div>
+    <main>
+        <h1 id="heading">Qual profissional de TI você seria?</h1>
+        <div class="app">
+            <div id="pergunta-container"></div>
+            <div class="button-holder">
+                <button id="iniciar-diagnostico" class="submit-button" onclick="iniciarDiagnostico()" style="display:block;margin:40px auto 0 auto;width:300px;height:60px;font-size:1.5rem;">Iniciar Diagnóstico</button>
+            </div>
+        </div>
+
+    </main>
+
+<script src="./script.js"></script>
+<script>
+function iniciarDiagnostico() {
+    document.getElementById('iniciar-diagnostico').style.display = 'none';
+    atualizarPergunta();
+}
+</script>
+</body>
+
+</html>

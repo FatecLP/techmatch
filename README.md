@@ -13,4 +13,4 @@
 ## 👨🏻‍🏫 Professor
 - **PhD - Bruno Zolotareff dos Santos** (Desenvolvimento Web II: FATEC Diadema - Luigi Papaiz)**
 
-### **TechMath** é uma plataforma objetiva e simples que oferece um quiz interativo para ajudar as pessoas a escolherem o caminho mais adaptado com sua personalidade no mundo do desenvolvimento.
+### **TechMatch** é uma plataforma objetiva e simples que oferece um quiz interativo para ajudar as pessoas a escolherem o caminho mais adaptado com sua personalidade no mundo do desenvolvimento.

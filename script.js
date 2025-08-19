@@ -81,7 +81,7 @@ const perguntas = [
     },
 ];
 
-let perguntaAtual = 0; // começa da pergunta 1 (índice 0 do array)
+let perguntaAtual = 0;
 
 function fadeOut(element, callback) {
     element.style.transition = 'opacity 0.4s';
@@ -104,7 +104,6 @@ function atualizarPergunta() {
     if (!container) return;
 
     fadeOut(container, () => {
-        // limpa o container
         container.innerHTML = '';
 
         if (perguntaAtual < perguntas.length) {
@@ -127,7 +126,6 @@ function atualizarPergunta() {
                 container.appendChild(label);
             });
 
-            // botão para próxima pergunta
             const btn = document.createElement('button');
             btn.textContent = 'Próxima';
             btn.className = 'submit-button';
@@ -135,7 +133,6 @@ function atualizarPergunta() {
             btn.onclick = () => {
                 const selecionado = container.querySelector('input[type="radio"]:checked');
                 if (selecionado) {
-                    // atualiza pesos
                     const valores = selecionado.value.split(',');
                     valores.forEach(v => {
                         if (v.trim() === 'backend') pesoBackend++;
@@ -150,7 +147,6 @@ function atualizarPergunta() {
             };
             container.appendChild(btn);
         } else {
-            // calcula o resultado
             let resultado = '';
             let imgSrc = '';
             let alt = '';
@@ -166,6 +162,8 @@ function atualizarPergunta() {
                 resultado = 'Analista de Dados';
                 imgSrc = './src/img/dexter.png';
                 alt = 'Analista de Dados';
+            } else {
+                resultado = 'Seus resultados foram muito equilibrados. Você tem potencial para ser um futuro full stack';
             }
             container.innerHTML = `<strong>Fim das perguntas!</strong><br><br><span>Seu perfil é: <b>${resultado}</b></span><br><br>`;
             if (imgSrc) {

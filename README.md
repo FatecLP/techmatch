@@ -1,4 +1,4 @@
-### TechMatch - README
+# TechMatch - README
 
 [![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)]()
 [![GitHub last commit](https://img.shields.io/github/last-commit/FatecLP/diagnostico)]()

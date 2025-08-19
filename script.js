@@ -81,29 +81,6 @@ const perguntas = [
     },
 ];
 
-// lógica pra definir programadores
-function programadorBackend() {
-    const resultado = checarRespostas(resposta1, resposta3, resposta5, resposta7)
-    if (!resultado) {
-        return false;
-    }
-    return true;
-}
-
-function definirProgramador() {
-    const backend = programadorBackend()
-    if (!backend) {
-        const outroDev = null
-        if (!outroDev) {
-            return "aindaOutroDev"
-        }
-        return "outroDev"
-    }
-    return "backend"
-}
-
-
-// let perguntaAtual = 0; // removido duplicado
 let perguntaAtual = 0; // começa da pergunta 1 (índice 0 do array)
 
 function fadeOut(element, callback) {
@@ -116,7 +93,6 @@ function fadeOut(element, callback) {
 
 function fadeIn(element) {
     element.style.transition = 'opacity 0.4s';
-    // Garante que o opacity começa em 0 antes de mostrar
     element.style.opacity = 0;
     setTimeout(() => {
         element.style.opacity = 1;
@@ -128,7 +104,7 @@ function atualizarPergunta() {
     if (!container) return;
 
     fadeOut(container, () => {
-        // Limpa o container
+        // limpa o container
         container.innerHTML = '';
 
         if (perguntaAtual < perguntas.length) {
@@ -151,7 +127,7 @@ function atualizarPergunta() {
                 container.appendChild(label);
             });
 
-            // Botão para próxima pergunta
+            // botão para próxima pergunta
             const btn = document.createElement('button');
             btn.textContent = 'Próxima';
             btn.className = 'submit-button';
@@ -159,7 +135,7 @@ function atualizarPergunta() {
             btn.onclick = () => {
                 const selecionado = container.querySelector('input[type="radio"]:checked');
                 if (selecionado) {
-                    // Atualiza pesos
+                    // atualiza pesos
                     const valores = selecionado.value.split(',');
                     valores.forEach(v => {
                         if (v.trim() === 'backend') pesoBackend++;
@@ -174,7 +150,7 @@ function atualizarPergunta() {
             };
             container.appendChild(btn);
         } else {
-            // Calcula o resultado
+            // calcula o resultado
             let resultado = '';
             let imgSrc = '';
             let alt = '';

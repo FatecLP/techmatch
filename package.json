@@ -1,0 +1,15 @@
+{
+  "name": "techmatch",
+  "version": "1.0.0",
+  "description": "[![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)]()\r [![GitHub last commit](https://img.shields.io/github/last-commit/FatecLP/diagnostico)]()",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "path": "^0.12.7"
+  }
+}

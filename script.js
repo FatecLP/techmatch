@@ -152,15 +152,15 @@ function atualizarPergunta() {
             let alt = '';
             if (pesoBackend > pesoFrontend && pesoBackend > pesoAnalista) {
                 resultado = 'Backend';
-                imgSrc = './src/img/cyborg.webp';
+                imgSrc = '/img/cyborg.webp';
                 alt = 'Backend';
             } else if (pesoFrontend > pesoBackend && pesoFrontend > pesoAnalista) {
                 resultado = 'Frontend';
-                imgSrc = './src/img/johnnybravo.webp';
+                imgSrc = '/img/johnnybravo.webp';
                 alt = 'Frontend';
             } else if (pesoAnalista > pesoBackend && pesoAnalista > pesoFrontend) {
                 resultado = 'Analista de Dados';
-                imgSrc = './src/img/dexter.png';
+                imgSrc = '/img/dexter.png';
                 alt = 'Analista de Dados';
             } else {
                 resultado = 'Seus resultados foram muito equilibrados. Você tem potencial para ser um futuro full stack';

@@ -2,7 +2,9 @@
 let pesoBackend = 0;
 let pesoFrontend = 0;
 let pesoAnalista = 0;
-
+let prompt = "Mostre um caminho claro para um usuario que fex um teste de especialidade em tech em 50 palavras o resultado foi: "
+let APIurl = 'https://api.openai.com/v1/chat/completions'
+let APIKey = ''
 const perguntas = [
     {
         texto: "Você tem mais interesse em:",
@@ -150,18 +152,25 @@ function atualizarPergunta() {
             let resultado = '';
             let imgSrc = '';
             let alt = '';
+            let text = ''
             if (pesoBackend > pesoFrontend && pesoBackend > pesoAnalista) {
                 resultado = 'Backend';
                 imgSrc = '/img/cyborg.webp';
                 alt = 'Backend';
+                text = callAPI(`${prompt} ${resultado}`)
+                console.log(text)
             } else if (pesoFrontend > pesoBackend && pesoFrontend > pesoAnalista) {
                 resultado = 'Frontend';
                 imgSrc = '/img/johnnybravo.webp';
                 alt = 'Frontend';
+                text = callAPI(prompt + resultado)
+                console.log(text)
             } else if (pesoAnalista > pesoBackend && pesoAnalista > pesoFrontend) {
                 resultado = 'Analista de Dados';
                 imgSrc = '/img/dexter.png';
                 alt = 'Analista de Dados';
+                text = callAPI(prompt + resultado)
+                console.log(text)
             } else {
                 resultado = 'Seus resultados foram muito equilibrados. Você tem potencial para ser um futuro full stack';
             }
@@ -177,4 +186,35 @@ function atualizarPergunta() {
         }
         fadeIn(container);
     });
+}
+async function callAPI(prompt) {
+    try {
+        const response = await fetch(APIurl, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${APIKey}`,
+            },
+            body: JSON.stringify(
+                {
+                    model: 'gpt-4o',
+                    messages: [
+                        {
+                            role: 'user',
+                            content: prompt
+                        }
+                    ],
+                    max_tokens: 150 
+                }
+            )
+        })
+        const data = await response.json()
+        console.log(data)
+        return data.choices[0].message.content
+
+    }
+   catch (error) {
+    console.error("Erro ao obter resposta:", error);
+  }
+    
 }

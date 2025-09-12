@@ -2,9 +2,9 @@
 let pesoBackend = 0;
 let pesoFrontend = 0;
 let pesoAnalista = 0;
-let prompt = "Mostre um caminho claro para um usuario que fex um teste de especialidade em tech em 50 palavras o resultado foi: "
-let APIurl = 'https://api.openai.com/v1/chat/completions'
-let APIKey = ''
+let prompt = "Mostre um caminho claro para um usuario que fez um teste de especialidade em tech em 50 palavras. o resultado foi: "
+let APIurl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
+let APIKey = 'AIzaSyAbKR5H3lQ0TTjToW4LTNwahCrFsIW8J7c'
 const perguntas = [
     {
         texto: "Você tem mais interesse em:",
@@ -105,7 +105,7 @@ function atualizarPergunta() {
     const container = document.getElementById('pergunta-container');
     if (!container) return;
 
-    fadeOut(container, () => {
+    fadeOut(container, async () => {
         container.innerHTML = '';
 
         if (perguntaAtual < perguntas.length) {
@@ -157,7 +157,8 @@ function atualizarPergunta() {
                 resultado = 'Backend';
                 imgSrc = '/img/cyborg.webp';
                 alt = 'Backend';
-                text = callAPI(`${prompt} ${resultado}`)
+                text =  await callAPI(`${prompt} ${resultado}`);
+                displayResult(text)
                 console.log(text)
             } else if (pesoFrontend > pesoBackend && pesoFrontend > pesoAnalista) {
                 resultado = 'Frontend';
@@ -187,6 +188,13 @@ function atualizarPergunta() {
         fadeIn(container);
     });
 }
+function displayResult(text){
+    const resultContainer = document.querySelector('#result')
+    resultContainer.innerHTML = `
+    <p>${text}</p>
+    `
+}
+
 async function callAPI(prompt) {
     try {
         const response = await fetch(APIurl,

@@ -189,29 +189,29 @@ function atualizarPergunta() {
 }
 async function callAPI(prompt) {
     try {
-        const response = await fetch(APIurl, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${APIKey}`,
-            },
-            body: JSON.stringify(
-                {
-                    model: 'gpt-4o',
-                    messages: [
+        const response = await fetch(APIurl,
+            {
+                method : 'POST',
+                headers : {
+                    'Content-Type': "application/json",
+                     "x-goog-api-key": `${APIKey}`
+                },
+                body : JSON.stringify({
+                    contents : [
                         {
-                            role: 'user',
-                            content: prompt
+                            parts: [
+                                {
+                                    text : prompt
+                                }
+                            ]
                         }
-                    ],
-                    max_tokens: 150 
-                }
-            )
-        })
+                    ]
+                })
+            }
+        )
         const data = await response.json()
-        console.log(data)
-        return data.choices[0].message.content
-
+        console.log(data.candidates[0].content.parts[0].text)
+        return data.candidates[0].content.parts[0].text
     }
    catch (error) {
     console.error("Erro ao obter resposta:", error);

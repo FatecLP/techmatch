@@ -2,9 +2,9 @@
 let pesoBackend = 0;
 let pesoFrontend = 0;
 let pesoAnalista = 0;
-let prompt = "Mostre um caminho claro para um usuario que fez um teste de especialidade em tech em 50 palavras. o resultado foi: "
+let prompt = "Mostre um caminho claro para um usuario que fez um teste de especialidade em tech de forma sucinta em 150 palavras. o resultado foi: "
 let APIurl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
-let APIKey = 'AIzaSyAbKR5H3lQ0TTjToW4LTNwahCrFsIW8J7c'
+let APIKey = ''
 const perguntas = [
     {
         texto: "Você tem mais interesse em:",
@@ -159,19 +159,18 @@ function atualizarPergunta() {
                 alt = 'Backend';
                 text =  await callAPI(`${prompt} ${resultado}`);
                 displayResult(text)
-                console.log(text)
             } else if (pesoFrontend > pesoBackend && pesoFrontend > pesoAnalista) {
                 resultado = 'Frontend';
                 imgSrc = '/img/johnnybravo.webp';
                 alt = 'Frontend';
-                text = callAPI(prompt + resultado)
-                console.log(text)
+                text =  await callAPI(`${prompt} ${resultado}`);
+                displayResult(text)
             } else if (pesoAnalista > pesoBackend && pesoAnalista > pesoFrontend) {
                 resultado = 'Analista de Dados';
                 imgSrc = '/img/dexter.png';
                 alt = 'Analista de Dados';
-                text = callAPI(prompt + resultado)
-                console.log(text)
+                text =  await callAPI(`${prompt} ${resultado}`);
+                displayResult(text)
             } else {
                 resultado = 'Seus resultados foram muito equilibrados. Você tem potencial para ser um futuro full stack';
             }
@@ -189,10 +188,68 @@ function atualizarPergunta() {
     });
 }
 function displayResult(text){
-    const resultContainer = document.querySelector('#result')
-    resultContainer.innerHTML = `
-    <p>${text}</p>
-    `
+    //usando parser de md para html para o tratamento de dados no front https://cdn.jsdelivr.net/npm/marked/marked.min.js
+    const resultContainer = document.querySelector('#result');
+
+    resultContainer.style.backgroundColor = '#6272A4';
+    resultContainer.style.padding = '20px';
+    resultContainer.style.borderRadius = '8px';
+    resultContainer.style.width = '500px'
+    resultContainer.style.transition = 'all 0.6s ease'
+    const parseText = marked.parse(text);
+
+    resultContainer.innerHTML = parseText;
+
+    const heading = document.querySelector('#heading')
+    heading.style.display = 'none'
+
+    const main = document.querySelector('main')
+    main.style.display = 'flex'
+    main.style.flexDirection = 'row'
+
+    const app = document.querySelector('.app')
+    app.style.width = '200px'
+    app.style.transition = 'width 0.5s ease-in'
+    app.style.marginRight = '50px'
+
+    const paragraphs = resultContainer.querySelectorAll('p');
+    paragraphs.forEach((paragraph) => {
+        paragraph.style.color = '#dedfe3ff';
+        paragraph.style.fontSize = '16px';
+        paragraph.style.lineHeight = '1.6';
+    });
+
+    
+    const strongs = resultContainer.querySelectorAll('strong');
+    strongs.forEach((strong) => {
+        strong.style.color = '#ffffffff';
+        strong.style.fontWeight = 'bold';
+    });
+
+    
+    const olists = resultContainer.querySelectorAll('ol');
+    olists.forEach((olist) => {
+        olist.style.paddingLeft = '20px';
+        olist.style.marginBottom = '15px';
+        olist.style.listStyleType = 'decimal';
+    });
+
+   
+    const ulists = resultContainer.querySelectorAll('ul');
+    ulists.forEach((ulist) => {
+        ulist.style.paddingLeft = '20px';
+        ulist.style.marginBottom = '15px';
+        ulist.style.listStyleType = 'disc';
+    });
+
+    
+    const listItems = resultContainer.querySelectorAll('li');
+    listItems.forEach((item) => {
+        item.style.marginBottom = '6px';
+        item.style.color = '#dedfe3ff';
+        item.style.fontSize = '15px';
+});
+
 }
 
 async function callAPI(prompt) {

@@ -13,5 +13,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/styles', express.static(path.join(__dirname, 'src/partials/components/styles')));
-app.use('/script', express.static(path.join(__dirname)));
+app.use("/script", express.static(path.join(__dirname)));
+app.use("/roleta", express.static(path.join(__dirname)));
 app.use('/img', express.static(path.join(__dirname, 'src/img')));

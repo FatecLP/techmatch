@@ -1,7 +1,7 @@
 # TechMatch Versão 2 - README
 
 [![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)]()
-[![GitHub last commit](https://img.shields.io/github/last-commit/FatecLP/diagnostico)]() &nbsp;&nbsp;&nbsp;
+[![GitHub last commit](https://img.shields.io/github/last-commit/FatecLP/diagnostico)]() <br />
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)]()
 [![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css&logoColor=white)]()
 [![Sass](https://img.shields.io/badge/Sass-CC6699?style=flat&logo=Sass&logoColor=white)]()
@@ -24,7 +24,7 @@ O processo de desenvolvimento foi conduzido em **dinâmica de laboratório**, ut
 ## 👨🏻‍🏫 Professor
 - **PhD - [Bruno Zolotareff dos Santos](https://github.com/bzsantos)** (Desenvolvimento Web II: FATEC Diadema - Luigi Papaiz)
 
-## 📚 Apredizado
+## 📚 Apredizado e tecnologias
 
 A nova versão do projeto trouxe duas frentes principais: integração com a API Gemini AI e a implementação de um caça-níquel interativo que faz uso das respostas para gerar resultados dinâmicos.
 
@@ -38,7 +38,7 @@ A nova versão do projeto trouxe duas frentes principais: integração com a API
       
 - 🌐 **Rotas com Node.js**
   - **npm** (Node Package Manager) utilizado para gerenciar dependências e scripts do projeto
-  - Uso do microframework **Express.js** que simplifica a criação de rotas e a estrutura do servidor
+  - Uso do microframework **Express.js** que simplifica a criação de rotas de páginas HTML e a estrutura do servidor
   - **Path** para trabalhar com caminhos de arquivos e diretórios
  
 - 🛡️ **Tratamento de erros**
@@ -49,7 +49,7 @@ A nova versão do projeto trouxe duas frentes principais: integração com a API
 - 🎰 **Caça-níquel interativo**
   - Implementada em **JavaScript**, roda resultados aleatórios e por fim mostra o resultado final
   - Eventos **DOM** para animação e exibição dinâmica do resultado
-  - **Keyframes CSS** para animação do Caça-niquel
+  - **Keyframes CSS** para animação do Caça-niquel e Sass para estilizações flexíveis
 
 ## 🚀 Como Executar
 

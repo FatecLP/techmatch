@@ -5,99 +5,11 @@ let prompt =
     "Mostre um caminho claro para um usuario que fez um teste de especialidade em tech de forma sucinta em 150 palavras. o resultado foi: ";
 let APIurl =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-let APIKey = "";
+let APIKey = "AIzaSyD7C0LNlyT-FOQH9KtCXLarICe-BI0ih3c";
 
 const modal = document.getElementById("modal");
 
-const perguntas = [
-    {
-        texto: "Você tem mais interesse em:",
-        opcoes: [
-            {
-                texto: "Criar as partes funcionais de um projeto",
-                valor: "backend,analista",
-            },
-            {
-                texto: "Criar as parte visuais de um projeto",
-                valor: "frontend",
-            },
-            {
-                texto: "Analisar e organizar as informações de um projeto",
-                valor: "analista,backend",
-            },
-        ],
-    },
-    {
-        texto: "Você se sente a vontade realizando tarefas no console do computador?",
-        opcoes: [
-            { texto: "Sim", valor: "backend,analista" },
-            { texto: "Não", valor: "frontend" },
-        ],
-    },
-    {
-        texto: "Qual tarefa te parece mais interessante?",
-        opcoes: [
-            { texto: "Resolver problemas de software", valor: "backend" },
-            {
-                texto: "Criar o layout de uma aplicação/site",
-                valor: "frontend",
-            },
-            { texto: "Organizar informações", valor: "analista" },
-        ],
-    },
-    {
-        texto: "Você se sente a vontade usando um computador com Linux?",
-        opcoes: [
-            { texto: "Sim", valor: "backend,analista" },
-            { texto: "Não", valor: "frontend" },
-        ],
-    },
-    {
-        texto: "Qual dessas habilidades você tem maior proficiência?",
-        opcoes: [
-            { texto: "Resolução de problemas", valor: "backend" },
-            { texto: "Criatividade", valor: "frontend" },
-            { texto: "Análise", valor: "analista" },
-        ],
-    },
-    {
-        texto: "Que tipo de sintaxe de linguagem você gosta?",
-        opcoes: [
-            { texto: "Verbosa", valor: "backend" },
-            { texto: "Simples", valor: "analista" },
-        ],
-    },
-    {
-        texto: "O que você acha mais interessante?",
-        opcoes: [
-            { texto: "Desenvolver funcionalidades", valor: "backend" },
-            { texto: "Criar interfaces visuais", valor: "frontend" },
-            { texto: "Analisar dados", valor: "analista" },
-        ],
-    },
-    {
-        texto: "Qual linguagem você prefere?",
-        opcoes: [
-            { texto: "Java", valor: "backend" },
-            { texto: "JavaScript", valor: "frontend" },
-            { texto: "PHP", valor: "backend,frontend" },
-        ],
-    },
-    {
-        texto: "Você gosta de trabalhar com instalação e configurações?",
-        opcoes: [
-            { texto: "Sim", valor: "backend" },
-            { texto: "Não", valor: "frontend" },
-        ],
-    },
-    {
-        texto: "Você é uma pessoa que gosta de sistemas com visuais modernos?",
-        opcoes: [
-            { texto: "Sim", valor: "frontend" },
-            { texto: "Não", valor: "backend,analista" },
-        ],
-    },
-];
+const perguntas = [];
 
 let perguntaAtual = 0;
 
@@ -163,9 +75,10 @@ function atualizarPergunta() {
                 if (selecionado) {
                     const valores = selecionado.value.split(",");
                     valores.forEach((v) => {
-                        if (v.trim() === "backend") pesoBackend++;
-                        if (v.trim() === "frontend") pesoFrontend++;
-                        if (v.trim() === "analista") pesoAnalista++;
+                        const valorPadrao = v.trim().toLowerCase();
+                        if (valorPadrao === "backend") pesoBackend++;
+                        if (valorPadrao === "frontend") pesoFrontend++;
+                        if (valorPadrao === "analista" || valorPadrao === "analista de dados") pesoAnalista++;
                     });
                     perguntaAtual++;
                     atualizarPergunta();
@@ -231,6 +144,18 @@ if (closeModalBtn) {
 
         callAPI(`${prompt} ${finalResult}`).then((text) => {
             displayResult(text);
+            const resultContainer = document.querySelector("#result");
+            if (resultContainer && !document.getElementById("btn-reiniciar-quiz")) {
+                const btnReiniciar = document.createElement("button");
+                btnReiniciar.textContent = "Refazer Quiz";
+                btnReiniciar.style.padding = "5px 10px";
+                btnReiniciar.id = "btn-reiniciar-quiz";
+                btnReiniciar.style.marginTop = "24px";
+                btnReiniciar.onclick = () => {
+                    iniciarQuiz();
+                };
+                resultContainer.appendChild(btnReiniciar);
+            }
         });
     });
 }
@@ -358,3 +283,76 @@ async function callAPI(prompt) {
         console.error("Erro ao obter resposta:", error);
     }
 }
+
+async function gerarPerguntasGemini(tema = "tecnologia e carreiras em TI") {
+    const promptGerar = `Gere um array JSON de 10 perguntas para um quiz sobre ${tema}. Cada pergunta deve ter o formato: { texto: 'Pergunta', opcoes: [ { texto: 'Opção 1', valor: 'backend|frontend|analista' }, ... ] }. As opções devem ser relevantes e balanceadas para cada perfil. Responda apenas com o array JSON, sem explicações.`;
+    try {
+        const response = await fetch(APIurl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": `${APIKey}`,
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [
+                            {
+                                text: promptGerar,
+                            },
+                        ],
+                    },
+                ],
+            }),
+        });
+        const data = await response.json();
+        const texto = data.candidates[0].content.parts[0].text;
+        let perguntasGeradas = [];
+        try {
+            perguntasGeradas = JSON.parse(texto);
+        } catch (e) {
+            const match = texto.match(/\[.*\]/s);
+            if (match) {
+                perguntasGeradas = JSON.parse(match[0]);
+            } else {
+                throw new Error("Não foi possível converter a resposta em JSON.");
+            }
+        }
+        perguntas.length = 0;
+        perguntas.push(...perguntasGeradas);
+        perguntaAtual = 0;
+        atualizarPergunta();
+    } catch (error) {
+        console.error("Erro ao gerar perguntas pelo Gemini:", error);
+        alert("Erro ao gerar perguntas. Tente novamente.");
+    }
+}
+
+function iniciarQuiz() {
+    pesoBackend = 0;
+    pesoFrontend = 0;
+    pesoAnalista = 0;
+    perguntaAtual = 0;
+    window.slotFinalText = undefined;
+    window.slotFinalImage = undefined;
+    window.slotFinalAlt = undefined;
+    if (typeof resetarRoleta === 'function') {
+        resetarRoleta();
+    } else if (window.resetarRoleta) {
+        window.resetarRoleta();
+    }
+    const resultContainer = document.querySelector("#result");
+    if (resultContainer) {
+        resultContainer.innerHTML = "";
+        resultContainer.style.backgroundColor = "";
+        resultContainer.style.padding = "";
+        resultContainer.style.borderRadius = "";
+        resultContainer.style.width = "";
+        resultContainer.style.marginTop = "";
+    }
+    gerarPerguntasGemini();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    iniciarQuiz();
+});

@@ -5,6 +5,10 @@
   color: white;
 }
 
+body{
+  background-color: #282A36;
+}
+
 main {
   background-color: #282A36;
   display: flex;

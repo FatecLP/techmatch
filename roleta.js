@@ -5,13 +5,20 @@ let intervaloAnimacao = null;
 let textoRevelado = false;
 
 const opcoesTexto = [
-    "Backend",
-    "Frontend",
-    "Analista",
-    "Full Stack",
-    "DevOps",
-    "QA",
+    "Camiseta Backend",
+    "Bootcamp Frontend",
+    "Caneca Analista de dados",
+    "Consultoria Full Stack",
+    "Curso DevOps",
+    "Curso QA",
 ];
+
+const premiosPorPerfil = {
+    "Backend": "Camiseta Backend",
+    "Frontend": "Bootcamp Frontend",
+    "Analista de Dados": "Caneca Analista de dados",
+    "Generalista de TI": "Consultoria Full Stack"
+};
 
 function iniciarAnimacao() {
     let contador = 0;
@@ -27,11 +34,17 @@ function revelarResultado() {
         intervaloAnimacao = null;
     }
     if (window.slotFinalText) {
-        slotText.textContent = window.slotFinalText;
+        const premio = premiosPorPerfil[window.slotFinalText] || "Curso QA";
+        slotText.textContent = premio;
         textoRevelado = true;
     } else {
         slotText.textContent = "???";
     }
+}
+
+function resetarRoleta() {
+    textoRevelado = false;
+    slotText.textContent = "";
 }
 
 lever.addEventListener("click", () => {

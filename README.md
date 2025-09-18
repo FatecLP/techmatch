@@ -14,6 +14,8 @@ Techmatch é um projeto de dinamica ágil desenvolvido na **Fatec Luigi Papaiz**
 
 O processo de desenvolvimento foi conduzido em **dinâmica de laboratório**, utilizando **aprendizado ágil** dentro de uma **metodologia imersiva** prática, o que proporcionou experimentação contínua, validação rápida e colaboração efetiva entre os participantes.
 
+Desafio de **Opção 2**: *Consumo de API generativa que preenche automaticamente o array das perguntas e respostas do mesmo quizz que fizeram na na fase I do projeto, e no final aparece uma tela de prêmio e diz: vire a roleta para ver o que ganhou*.
+
 ## 👥 Nomes dos Integrantes
 - André Diogo Melchior da Silva
 - Juan Pablo Firmino Ferreira
@@ -22,7 +24,10 @@ O processo de desenvolvimento foi conduzido em **dinâmica de laboratório**, ut
 - Nickolas Lopes Araújo
 
 ## 👨🏻‍🏫 Professor
-- **PhD - [Bruno Zolotareff dos Santos](https://github.com/bzsantos)** (Desenvolvimento Web II: FATEC Diadema - Luigi Papaiz)
+- **PhD - [Bruno Zolotareff dos Santos](https://github.com/bzsantos)** - Disciplina de Desenvolvimento Web II, FATEC Luigi Papaiz | 2025.
+
+## 👨🏻‍🏫 Coordenação
+- **Profª - Andréa Zotovici**
 
 ## 📚 Apredizado e tecnologias
 
